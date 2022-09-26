@@ -1,7 +1,4 @@
 import Configuration from "@/configuration";
-import Store from "@/global/store";
-import Account from "@/repositories/account/account";
-import { TypeCompte } from "@/repositories/enums/typeCompte";
 import { createRouter, createWebHistory } from "vue-router";
 
 enum Routes {
@@ -21,7 +18,7 @@ export const routeConfig = [
     component: () => import("@/modules/session/Session.vue"),
   },
   {
-    path: "/partie",
+    path: "/partie/:id",
     name: Routes.Partie,
     component: () => import("@/modules/partie/Partie.vue"),
   },

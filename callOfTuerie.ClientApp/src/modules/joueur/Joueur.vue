@@ -18,8 +18,8 @@
                     </q-item-section>
                     <q-item-section side>
                         <div class="text-grey-8 q-gutter-xs">
-                            <!-- <q-btn size="md" color="green" flat dense round icon="mdi-pen" @click="vm.showEdit(ts)" /> -->
-                            <!-- <q-btn size="md" color="red" flat dense round icon="mdi-delete" @click="vm.delete(ts.id)" /> -->
+                            <q-btn size="md" flat dense round icon="mdi-pen" @click="vm.showEdit(ts)" />
+                            <q-btn size="md" color="red" flat dense round icon="mdi-delete" @click="vm.delete(ts.id)" />
                         </div>
 
                     </q-item-section>

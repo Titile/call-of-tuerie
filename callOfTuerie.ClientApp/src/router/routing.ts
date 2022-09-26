@@ -22,7 +22,7 @@ export default class Routing {
   }
 
   public push(route: Routes, params?: RouteParamsRaw) {
-    if (params) this.router.push({ name: route, query: params });
+    if (params) this.router.push({ name: route, params: params });
     else this.router.push({ name: route });
     this.current = route;
   }

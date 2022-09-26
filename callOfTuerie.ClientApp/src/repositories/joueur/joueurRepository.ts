@@ -17,7 +17,6 @@ export default class JoueurRepository {
   }
 
   public add(joueur: Joueur) {
-    console.log(new joueur_api(joueur));
     const reponse = this.crud.add<joueur_api>(
       new joueur_api().fromModel(joueur)
     );

@@ -20,6 +20,7 @@ import { onMounted } from 'vue';
 import { DrawerVm } from './layout/components/drawerVm';
 import Supabase from './plugins/backend/supabase';
 import JoueurRepository from './repositories/joueur/joueurRepository';
+import SessionRepository from './repositories/session/sessionRepository';
 
 const configuration = register(new Configuration())
 const drawerVm = register(new DrawerVm())
@@ -28,8 +29,10 @@ const api = register(new Supabase(configuration.apiUrl, configuration.apiKey))
 
 
 const repoJoueur = register(new JoueurRepository(api))
+const repoSession = register(new SessionRepository(api))
 onMounted(() => {
   repoJoueur.reload()
+  repoSession.reload()
 })
 
 // requester.account

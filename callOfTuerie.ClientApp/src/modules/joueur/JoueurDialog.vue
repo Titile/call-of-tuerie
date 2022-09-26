@@ -34,7 +34,5 @@ import { useQuasar } from 'quasar';
 import { watch } from 'vue';
 
 const vm = subscribe(JoueurVm)
-watch(vm.dialog, (currentValue) => {
-    if (!currentValue.isOpen) vm.joueur.pseudo = ''
-})
+
 </script>
