@@ -1,0 +1,32 @@
+{
+  "name": "suismasante-clientapp",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.15.2",
+    "@supabase/supabase-js": "^1.35.6",
+    "@types/lodash": "^4.14.185",
+    "lodash": "^4.17.21",
+    "quasar": "^2.7.7",
+    "thin-backend": "^0.10.4",
+    "thin-backend-vue": "^0.10.1",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.5"
+  },
+  "devDependencies": {
+    "@quasar/vite-plugin": "^1.1.1",
+    "@types/node": "^18.7.14",
+    "@types/thin-backend": "https://thin.dev/types/6fcefcfc-3e05-488c-afe5-32cc122543e3/LbbgyXeTmGpQzkiiqBszYCfaPoxpLHuS",
+    "@vitejs/plugin-vue": "^3.0.3",
+    "sass": "^1.32.12",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.7",
+    "vue-tsc": "^0.39.5"
+  }
+}
