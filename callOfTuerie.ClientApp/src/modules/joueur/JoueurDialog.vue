@@ -28,11 +28,8 @@
     </q-dialog>
 </template>
 <script setup lang="ts">
-import { register, subscribe } from '@/global/injector';
+import { subscribe } from '@/global/injector';
 import JoueurVm from "./joueurVM"
-import { useQuasar } from 'quasar';
-import { watch } from 'vue';
-
 const vm = subscribe(JoueurVm)
 
 </script>

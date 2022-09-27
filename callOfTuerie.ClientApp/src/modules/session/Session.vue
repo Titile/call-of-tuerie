@@ -1,13 +1,18 @@
 <template>
     <section>
-        <q-btn @click="vm.newGame()">Nouvelle game 🎮</q-btn>
         <q-card class="q-mt-sm">
-            <q-card-section v-for="session in vm.repoSession.sessions" @click="vm.goToPartie(session.id)">
-                <div>
-                    {{session}}
-                </div>
+            <q-btn @click="vm.newGame()">Nouvelle game 🎮</q-btn>
 
-            </q-card-section>
+            <q-card class="q-ma-md" bordered v-for="session in vm.repoSession.orderedSession"
+                @click="vm.goToPartie(session.id)">
+                <q-card-section>
+                    <div class="flex justify-around">
+                        {{vm.formatedDate(session.date)}}
+                    </div>
+
+                </q-card-section>
+            </q-card>
+
         </q-card>
         <SessionDialog />
     </section>

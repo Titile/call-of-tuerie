@@ -5,6 +5,7 @@ import Session from "@/repositories/session/session";
 import SessionRepository from "@/repositories/session/sessionRepository";
 import Routes from "@/router";
 import Routing from "@/router/routing";
+import moment from "moment";
 
 export default class SessionVm {
   dialog = new Openable();
@@ -16,6 +17,10 @@ export default class SessionVm {
     this.repoJoueurs = subscribe(JoueurRepository);
     this.repoSession = subscribe(SessionRepository);
     this.router = subscribe(Routing);
+  }
+
+  public formatedDate(date: string) {
+    return moment(date).format("DD/MM/YYYY HH:mm");
   }
 
   inGame(id: number) {

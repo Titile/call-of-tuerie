@@ -20,7 +20,22 @@ export default class PartieVm {
   id!: number;
   joueurs: Joueur[] = [];
   //repoPartie
-  maps = ["Shipment", "Bazar", "SpeedBall"];
+  maps = [
+    "Shipment",
+    "Bazar",
+    "SpeedBall",
+    "Hill",
+    "Killhouse",
+    "Cargo",
+    "Station",
+    "Dock",
+    "Trench",
+    "Stadium",
+    "Goulag",
+    "Pine",
+    "Livestock",
+    "Dock",
+  ];
 
   constructor() {
     this.router = subscribe(Routing);

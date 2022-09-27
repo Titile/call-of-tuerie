@@ -33,6 +33,8 @@ const api = register(new Supabase(configuration.apiUrl, configuration.apiKey))
 const repoJoueur = register(new JoueurRepository(api))
 const repoSession = register(new SessionRepository(api))
 const repoPartie = register(new PartieRepository(api))
+
+api.subscribe(repoJoueur, repoSession, repoPartie)
 moment.locale("fr")
 onBeforeMount(() => {
   repoJoueur.reload()

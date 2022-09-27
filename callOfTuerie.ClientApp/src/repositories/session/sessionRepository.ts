@@ -14,7 +14,7 @@ export default class SessionRepository {
   }
 
   public get orderedSession() {
-    return orderBy(this.sessions, (x) => x.id);
+    return orderBy(this.sessions, (x) => x.date, "desc");
   }
 
   public async one(id: number) {

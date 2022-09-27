@@ -27,10 +27,9 @@
             </q-card-section>
             <q-separator></q-separator>
             <q-card-section>
-                <div v-for="joueur in vm.joueurs">
-                    {{joueur.pseudo}}
-                    <q-space></q-space>
-                    {{vm.scoreJoueur(joueur.id)}}
+                <div v-for="joueur in vm.joueurs" class="flex">
+                    <div class="q-mr-sm">{{joueur.pseudo}}</div> :
+                    <div class="q-ml-sm">{{vm.scoreJoueur(joueur.id)}}</div>
                 </div>
             </q-card-section>
         </q-card>
