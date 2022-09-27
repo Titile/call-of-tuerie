@@ -17,6 +17,12 @@ export default class SessionRepository {
     return orderBy(this.sessions, (x) => x.id);
   }
 
+  public async one(id: number) {
+    const session = await this.crud.getOne(id);
+    if (session) return new Session(session);
+    else return null;
+  }
+
   public async add(session: Session): Promise<Session> {
     console.log(new session_api(session));
     const reponse = await this.crud.add<session_api>(
@@ -25,16 +31,11 @@ export default class SessionRepository {
 
     const sessions = reponse.map((y: any) => new Session(y));
     return sessions.length ? sessions[0] : new Session();
-    // return reponse.then((x) => {
-    //   this.sessions.push(...sessions);
-    // });
   }
 
   public async get() {
-    this.crud
-      .get()
-      .then((x: any) => (this.sessions = x.map((y: any) => new Session(y))));
-    // this.api.getAllTypeService().then((x) => (this.joueurs = x));
+    const sessions = await this.crud.get<Session[]>();
+    this.sessions = sessions.map((y: any) => new Session(y));
   }
 
   public reload() {

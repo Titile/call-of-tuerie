@@ -8,7 +8,7 @@ declare global {
 }
 
 String.prototype.isNullOrEmpty = function () {
-  return !this || this == undefined || this == "";
+  return !this || this == null || this == undefined || this == "";
 };
 
 String.prototype.toTimeModel = function () {

@@ -13,6 +13,18 @@ export default class Crud {
     return data;
   }
 
+  public async getOne<T>(id: number): Promise<T | null> {
+    const { data, error } = await this.api
+      .from(this.name)
+      .select("*")
+      .eq("id", id);
+    if (error) {
+      Notification.errorFromApi(error);
+      return Promise.reject(error);
+    }
+    return data.length ? data[0] : null;
+  }
+
   public async update<T>(obj: T): Promise<T[]> {
     const { data, error } = await this.api.from(this.name).update(obj);
     if (error) {

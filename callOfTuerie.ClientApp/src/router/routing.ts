@@ -31,8 +31,9 @@ export default class Routing {
     return route == this.current;
   }
 
-  public param(key: string) {
-    return new URLSearchParams(document.location.search).get(key);
+  public param<T>(key: string) {
+    return this.route.params[key] as T;
+    // return new URLSearchParams(document.location.search).get(key);
   }
 
   public navigateOutsideTo(url: string) {
