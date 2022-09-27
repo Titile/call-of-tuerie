@@ -1,7 +1,15 @@
 #app {   
-    background: url("@/assets/img/background.jpg")  center fixed;
-    background-size: cover;  
+    // background: url("@/assets/img/background.jpg")  center fixed;
+    // background-size: cover;  
+  
 }
 .translucide-pink {
     background-color: #4b16029c !important;
+}
+
+.bg-img {
+    background: url("@/assets/img/background.jpg");
+    position:fixed;
+    top: 0;
+    bottom: 0;
 }

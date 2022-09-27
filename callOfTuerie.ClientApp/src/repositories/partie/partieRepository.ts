@@ -28,7 +28,7 @@ export default class PartieRepository {
   }
 
   public reload() {
-    this.crud
+    return this.crud
       .get()
       .then((x: any) => (this.parties = x.map((y: any) => new Partie(y))));
   }

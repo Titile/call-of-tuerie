@@ -15,15 +15,20 @@
             <q-card-section>
                 <div class="text-center text-h6">Sur quelle map ?</div>
             </q-card-section>
-            <q-btn-toggle v-model="vm.partie.map" toggle-color="secondary" :options="vm.optionsMaps"></q-btn-toggle>
+            <!-- <q-btn-toggle v-model="vm.partie.map" toggle-color="secondary" :options="vm.optionsMaps"></q-btn-toggle> -->
+            <div class="q-ma-md">
+                <q-btn v-for="map in vm.maps" @click="vm.partie.map = map" :class="{'selected': vm.partie.map == map}">
+                    {{map}}</q-btn>
+            </div>
             <q-separator></q-separator>
             <q-card-actions class="flex justify-end">
-                <q-btn class="q-mt-sm" color="primary" @click="vm.validatePartie()">Aller ! 🧨🧨</q-btn>
+                <q-btn :disable="vm.partie.joueur_id == 0" class="q-mt-sm" color="primary" @click="vm.validatePartie()">
+                    Aller ! 🧨🧨</q-btn>
             </q-card-actions>
         </q-card>
         <q-card>
             <q-card-section>
-                <div class="text-center text-h6">Les score !!!</div>
+                <div class="text-center text-h6">Les scores !!!</div>
             </q-card-section>
             <q-separator></q-separator>
             <q-card-section>
@@ -62,3 +67,9 @@ onMounted(() => {
 })
 
 </script>
+<style lang="scss">
+.selected {
+    background-color: var(--q-secondary);
+    color: white;
+}
+</style>

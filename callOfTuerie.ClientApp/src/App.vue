@@ -1,5 +1,5 @@
 <template>
-  <q-layout>
+  <q-layout class="bg-img">
     <Navbar />
     <Drawer />
     <q-page-container>

@@ -28,13 +28,13 @@ export default class PartieVm {
     "Killhouse",
     "Cargo",
     "Station",
-    "Dock",
     "Trench",
     "Stadium",
     "Goulag",
     "Pine",
     "Livestock",
     "Dock",
+    "Shoothouse",
   ];
 
   constructor() {

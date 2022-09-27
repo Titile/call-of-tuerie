@@ -1,21 +1,27 @@
 import { subscribe } from "@/global/injector";
 import Openable from "@/global/openable";
 import JoueurRepository from "@/repositories/joueur/joueurRepository";
+import Partie from "@/repositories/partie/partie";
+import PartieRepository from "@/repositories/partie/partieRepository";
 import Session from "@/repositories/session/session";
 import SessionRepository from "@/repositories/session/sessionRepository";
 import Routes from "@/router";
 import Routing from "@/router/routing";
 import moment from "moment";
+import SessionModel from "../partie/models/SessionModel";
 
 export default class SessionVm {
   dialog = new Openable();
   repoJoueurs!: JoueurRepository;
   repoSession!: SessionRepository;
+  repoPartie!: PartieRepository;
   router!: Routing;
   session = new Session();
+  sessions: SessionModel[] = [];
   constructor() {
     this.repoJoueurs = subscribe(JoueurRepository);
     this.repoSession = subscribe(SessionRepository);
+    this.repoPartie = subscribe(PartieRepository);
     this.router = subscribe(Routing);
   }
 
@@ -31,12 +37,17 @@ export default class SessionVm {
     if (this.inGame(id)) {
       this.session.joueurIds = this.session.joueurIds.filter((x) => x != id);
     } else this.session.joueurIds.push(id);
-    console.log("in game", this.session.joueurIds);
   }
 
   selectAll() {
     if (this.allSelected) this.session.joueurIds = [];
     else this.session.joueurIds = this.repoJoueurs.joueurs.map((x) => x.id);
+  }
+
+  pseudoJoueur(idJoueur: number) {
+    return (
+      this.repoJoueurs.joueurs.find((x) => x.id == idJoueur)?.pseudo ?? "-NA-"
+    );
   }
 
   add() {
@@ -64,5 +75,21 @@ export default class SessionVm {
 
   newGame() {
     this.dialog.open();
+  }
+
+  async get() {
+    this.repoPartie.reload().then((x) => {
+      this.sessions = this.repoSession.orderedSession.map(
+        (x) =>
+          new SessionModel({
+            id: x.id,
+            date: x.date,
+            joueurIds: x.joueurIds,
+            parties: this.repoPartie.partiesSession(x.id),
+          })
+      );
+    });
+
+    console.log(this.repoSession.orderedSession);
   }
 }
