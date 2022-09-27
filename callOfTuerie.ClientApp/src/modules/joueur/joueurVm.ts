@@ -4,6 +4,7 @@ import { Joueur } from "@/repositories/joueur/joueur";
 import JoueurRepository from "@/repositories/joueur/joueurRepository";
 import Notification from "@/plugins/Notification";
 
+// test ajout commentaire pour le build qui ne se lance pas
 export default class JoueurVm {
   dialog = new Openable();
   joueur = new Joueur();

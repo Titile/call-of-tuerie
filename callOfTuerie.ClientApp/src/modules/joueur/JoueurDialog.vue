@@ -29,7 +29,7 @@
 </template>
 <script setup lang="ts">
 import { subscribe } from '@/global/injector';
-import JoueurVm from "./joueurVM"
+import JoueurVm from "@/modules/joueur/joueurVm";
 const vm = subscribe(JoueurVm)
 
 </script>
