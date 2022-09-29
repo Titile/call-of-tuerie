@@ -78,18 +78,20 @@ export default class SessionVm {
   }
 
   async get() {
-    this.repoPartie.reload().then((x) => {
-      this.sessions = this.repoSession.orderedSession.map(
-        (x) =>
-          new SessionModel({
-            id: x.id,
-            date: x.date,
-            joueurIds: x.joueurIds,
-            parties: this.repoPartie.partiesSession(x.id),
-          })
-      );
-    });
-
-    console.log(this.repoSession.orderedSession);
+    // Charger les sessions
+    await this.repoSession.get();
+    // Charger les parties
+    await this.repoPartie.get();
+    // Charger les joueurs
+    await this.repoJoueurs.get();
+    this.sessions = this.repoSession.sessions.map(
+      (x) =>
+        new SessionModel({
+          id: x.id,
+          date: x.date,
+          joueurIds: x.joueurIds,
+          parties: this.repoPartie.partiesSession(x.id),
+        })
+    );
   }
 }

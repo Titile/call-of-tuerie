@@ -1,14 +1,10 @@
 <template>
     <section class="q-gutter-sm">
-        <q-card v-if="vm.session">
+        <q-card v-if="vm.session && vm.isToday">
             <q-card-section>
                 <div class="text-center text-h6">Qui qui gagne ?</div>
             </q-card-section>
             <q-separator></q-separator>
-            <!-- {{vm.session}} -->
-            <!-- <q-btn-group>
-            <q-btn v-for="joueur in vm.joueurs">{{joueur.pseudo}}</q-btn>
-        </q-btn-group> -->
             <q-btn-toggle v-model="vm.partie.joueur_id" toggle-color="secondary" :options="vm.optionsJoueurs">
             </q-btn-toggle>
             <q-separator></q-separator>
@@ -17,8 +13,9 @@
             </q-card-section>
             <!-- <q-btn-toggle v-model="vm.partie.map" toggle-color="secondary" :options="vm.optionsMaps"></q-btn-toggle> -->
             <div class="q-ma-md">
-                <q-btn v-for="map in vm.maps" @click="vm.partie.map = map" :class="{'selected': vm.partie.map == map}">
-                    {{map}}</q-btn>
+                <q-btn v-for="map in vm.repoMap.maps" @click="vm.partie.map = map.nom"
+                    :class="{'selected': vm.partie.map == map.nom}">
+                    {{map.nom}}</q-btn>
             </div>
             <q-separator></q-separator>
             <q-card-actions class="flex justify-end">

@@ -45,10 +45,9 @@ export default class JoueurRepository {
   }
 
   public async get() {
-    this.crud
-      .get()
-      .then((x: any) => (this.joueurs = x.map((y: any) => new Joueur(y))));
-    // this.api.getAllTypeService().then((x) => (this.joueurs = x));
+    const data = await this.crud.get<Joueur[]>();
+    this.joueurs = data.map((y) => new Joueur(y));
+    return this.joueurs;
   }
 
   public reload() {

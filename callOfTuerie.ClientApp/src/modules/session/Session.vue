@@ -9,9 +9,6 @@
                     <div class="flex justify-around">
                         <div>{{vm.formatedDate(session.date)}}</div>
                         <div>{{session.parties.length}} parties</div>
-
-                        <!-- <q-badge color="secondary" class="text-white">{{vm.pseudoJoueur(session.winner().id)}}
-                        </q-badge> -->
                     </div>
                     <div class="text-overline text-center">
                         {{vm.pseudoJoueur(session.winner().id)}}

@@ -13,7 +13,6 @@ export default class SessionModel extends Session {
   public winner() {
     const parties = groupBy(this.parties, (x) => x.joueur_id);
     const joueurId = uniq(this.parties.map((x) => x.joueur_id));
-    console.log(joueurId);
     const winner = {
       id: 0,
       score: 0,
@@ -26,7 +25,6 @@ export default class SessionModel extends Session {
         winner.id = joueur;
       }
     }
-    console.log(winner);
     return winner;
   }
 }

@@ -3,6 +3,7 @@ import Notification from "@/plugins/Notification";
 import partie_api from "@/repositories/api/partie_api";
 import { Joueur } from "@/repositories/joueur/joueur";
 import JoueurRepository from "@/repositories/joueur/joueurRepository";
+import MapRepository from "@/repositories/map/mapRepository";
 import Partie from "@/repositories/partie/partie";
 import PartieRepository from "@/repositories/partie/partieRepository";
 import SessionRepository from "@/repositories/session/sessionRepository";
@@ -17,6 +18,7 @@ export default class PartieVm {
   repoSession!: SessionRepository;
   repoJoueur!: JoueurRepository;
   repoPartie!: PartieRepository;
+  repoMap!: MapRepository;
   id!: number;
   joueurs: Joueur[] = [];
   //repoPartie
@@ -35,6 +37,7 @@ export default class PartieVm {
     "Livestock",
     "Dock",
     "Shoothouse",
+    "Verdansk",
   ];
 
   constructor() {
@@ -44,10 +47,15 @@ export default class PartieVm {
     this.repoSession = subscribe(SessionRepository);
     this.repoJoueur = subscribe(JoueurRepository);
     this.repoPartie = subscribe(PartieRepository);
+    this.repoMap = subscribe(MapRepository);
   }
 
   public get formattedDate() {
     return moment(this.session?.date).format("DD/MM/YYYY");
+  }
+
+  public get isToday() {
+    return this.formattedDate == moment().format("DD/MM/YYYY");
   }
 
   public get optionsJoueurs() {
@@ -92,14 +100,23 @@ export default class PartieVm {
   }
 
   public async get(id: number) {
-    await this.repoSession.one(id).then((x) => {
+    this.repoSession.one(id).then((x) => {
       if (!x) Notification.error("La session est introuvable");
       this.session = new SessionModel(x as SessionModel);
 
-      this.joueurs = this.repoJoueur.joueurs.filter((x) =>
-        this.session.joueurIds.includes(x.id)
-      );
+      this.repoPartie
+        .get()
+        .then(
+          (x) =>
+            (this.session.parties = this.repoPartie.orderedParties(this.id))
+        );
+      this.repoJoueur.get().then((x) => {
+        this.joueurs = this.repoJoueur.joueurs.filter((x) =>
+          this.session.joueurIds.includes(x.id)
+        );
+      });
     });
-    this.session.parties = this.repoPartie.orderedParties(this.id);
+
+    await this.repoMap.get();
   }
 }

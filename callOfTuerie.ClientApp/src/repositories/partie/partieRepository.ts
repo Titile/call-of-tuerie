@@ -27,6 +27,12 @@ export default class PartieRepository {
     });
   }
 
+  public async get() {
+    const parties = await this.crud.get<Partie[]>();
+    this.parties = parties;
+    return parties;
+  }
+
   public reload() {
     return this.crud
       .get()

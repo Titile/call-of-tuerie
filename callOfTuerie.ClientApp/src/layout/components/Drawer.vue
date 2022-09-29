@@ -16,6 +16,13 @@
                         <q-item-label class="text-white" overline>Iza pory e</q-item-label>
                     </q-item-section>
                 </q-item>
+
+                <q-item clickable v-ripple :to="{ name: Routes.Map }">
+                    <q-item-section>
+                        <q-item-label>Maps</q-item-label>
+                        <q-item-label class="text-white" overline>K'aiza e ! </q-item-label>
+                    </q-item-section>
+                </q-item>
             </q-list>
         </q-scroll-area>
     </q-drawer>

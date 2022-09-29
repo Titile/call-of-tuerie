@@ -6,6 +6,7 @@ enum Routes {
   Session = "session",
   Joueur = "joueur",
   Partie = "partie",
+  Map = "map",
 }
 export default Routes;
 /**
@@ -26,6 +27,11 @@ export const routeConfig = [
     path: "/joueur",
     name: Routes.Joueur,
     component: () => import("@/modules/joueur/Joueur.vue"),
+  },
+  {
+    path: "/map",
+    name: Routes.Map,
+    component: () => import("@/modules/map/Map.vue"),
   },
 ];
 

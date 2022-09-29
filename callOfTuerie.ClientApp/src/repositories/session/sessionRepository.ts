@@ -35,10 +35,12 @@ export default class SessionRepository {
 
   public async get() {
     const sessions = await this.crud.get<Session[]>();
-    this.sessions = sessions.map((y: any) => new Session(y));
+    this.sessions = sessions.map((y) => new Session(y));
+    this.sessions = orderBy(this.sessions, (x) => x.date, "desc");
+    return this.sessions;
   }
 
-  public reload() {
+  public async reload() {
     this.get();
   }
 }

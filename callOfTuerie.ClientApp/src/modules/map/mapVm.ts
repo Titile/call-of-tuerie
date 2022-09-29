@@ -1,33 +1,32 @@
 import { subscribe } from "@/global/injector";
 import Openable from "@/global/openable";
-import { Joueur } from "@/repositories/joueur/joueur";
-import JoueurRepository from "@/repositories/joueur/joueurRepository";
 import Notification from "@/plugins/Notification";
+import MapRepository from "@/repositories/map/mapRepository";
+import Map from "@/repositories/map/map";
 
 // test ajout commentaire pour le build qui ne se lance pas
-export default class JoueurVm {
+export default class MapVm {
   dialog = new Openable();
-  joueur = new Joueur();
-  repository!: JoueurRepository;
+  map = new Map();
+  repository!: MapRepository;
 
   constructor() {
-    this.repository = subscribe(JoueurRepository);
-    console.log(this.repository);
+    this.repository = subscribe(MapRepository);
   }
 
-  public newJoueur() {
+  public newMap() {
     this.dialog.open();
-    this.joueur = new Joueur();
+    this.map = new Map();
   }
 
-  public showEdit(joueur: Joueur) {
-    this.joueur = new Joueur(joueur);
+  public showEdit(map: Map) {
+    this.map = new Map(map);
     this.dialog.open();
   }
 
   public delete(id: number) {
     Notification.confirm(
-      "Etes-vous sûr(e) de vouloir supprimer ce cochon ?",
+      "Etes-vous sûr(e) de vouloir supprimer cette map ?",
       "Confirmation de suppression",
       () => {
         this.repository.delete(id).then((x) => {
@@ -38,10 +37,10 @@ export default class JoueurVm {
   }
 
   public addOrEdit() {
-    if (this.joueur.id == 0) {
-      this.repository.add(this.joueur).then(() => this.dialog.close());
+    if (this.map.id == 0) {
+      this.repository.add(this.map).then(() => this.dialog.close());
     } else {
-      this.repository.edit(this.joueur).then(() => this.dialog.close());
+      this.repository.edit(this.map).then(() => this.dialog.close());
     }
   }
 
