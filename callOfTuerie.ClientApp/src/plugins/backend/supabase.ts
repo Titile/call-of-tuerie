@@ -21,25 +21,15 @@ export default class Supabase {
   ) {
     this.api
       .from("partie")
-      .on("INSERT", (payload: any) => {
-        debugger;
-        repoPartie.reload();
-      })
-      .subscribe();
-
-    this.api
-      .from("partie")
-      .on("UPDATE", (payload: any) => {
-        console.log("Change received!", payload);
-      })
-      .subscribe();
-
-    this.api
-      .from("*")
       .on("*", (payload: any) => {
-        debugger;
-        console.log(payload);
-        repoPartie.reload();
+        repoPartie.get();
+      })
+      .subscribe();
+
+    this.api
+      .from("session")
+      .on("*", (payload: any) => {
+        repoSession.get();
       })
       .subscribe();
   }

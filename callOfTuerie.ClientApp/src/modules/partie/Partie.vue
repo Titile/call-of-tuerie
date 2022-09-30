@@ -1,6 +1,9 @@
 <template>
     <section class="q-gutter-sm">
         <q-card v-if="vm.session && vm.isToday">
+            <q-btn flat @click="vm.get(vm.id)" class="card-floating-action right">
+                <q-icon name="mdi-refresh"></q-icon>
+            </q-btn>
             <q-card-section>
                 <div class="text-center text-h6">Qui qui gagne ?</div>
             </q-card-section>
@@ -68,5 +71,17 @@ onMounted(() => {
 .selected {
     background-color: var(--q-secondary);
     color: white;
+}
+
+.card-floating-action {
+    position: absolute;
+    z-index: 2;
+
+    &.right {
+        right: 0;
+
+    }
+
+    top: 0;
 }
 </style>

@@ -1,7 +1,12 @@
 <template>
     <section>
         <q-card class="q-mt-sm">
-            <q-btn @click="vm.newGame()" color="secondary">Nouvelle game 🎮</q-btn>
+            <div class="flex justify-between">
+                <q-btn @click="vm.newGame()" color="secondary">Nouvelle game 🎮</q-btn>
+                <q-btn icon="refresh" flat round @click="vm.get()">
+
+                </q-btn>
+            </div>
 
             <q-card bordered v-if="vm.sessions.length" class="q-ma-md shadow-2" v-for="session in vm.sessions"
                 @click="vm.goToPartie(session.id)">
