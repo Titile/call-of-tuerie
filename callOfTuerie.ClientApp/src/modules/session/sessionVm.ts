@@ -50,6 +50,19 @@ export default class SessionVm {
     );
   }
 
+  pseudoWinners(winners: Array<{ id: number; score: number }>) {
+    let pseudos = "";
+    for (const winner of winners) {
+      const names = winners.map(
+        (x) =>
+          this.repoJoueurs.joueurs.find((x) => x.id == winner.id)?.pseudo ??
+          "-NA-"
+      );
+      pseudos = names.join(",");
+    }
+    return pseudos;
+  }
+
   add() {
     this.repoSession.add(this.session).then((x) => {
       debugger;

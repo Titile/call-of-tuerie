@@ -31,12 +31,30 @@
                 <div class="text-center text-h6">Les scores !!!</div>
             </q-card-section>
             <q-separator></q-separator>
-            <q-card-section>
-                <div v-for="joueur in vm.joueurs" class="flex">
-                    <div class="q-mr-sm">{{joueur.pseudo}}</div> :
-                    <div class="q-ml-sm">{{vm.scoreJoueur(joueur.id)}}</div>
+            <div class="row">
+                <div class="col-6">
+                    <q-card-section class="flex column full-height justify-center items-center">
+                        <div class="text-overline">
+                            Le bâtard qui gagne :
+                        </div>
+                        <div>
+                            <span
+                                class="text-h6 text-accent">{{vm.session?.pseudoWinners(vm.repoJoueur.joueurs)}}</span>
+                        </div>
+
+                    </q-card-section>
                 </div>
-            </q-card-section>
+                <div class="col-6">
+                    <q-card-section>
+                        <div v-for="joueur in vm.joueurs" class="flex">
+                            <div class="q-mr-sm">{{joueur.pseudo}}</div> :
+                            <div class="q-ml-sm">{{vm.scoreJoueur(joueur.id)}}</div>
+                        </div>
+                    </q-card-section>
+                </div>
+            </div>
+
+
         </q-card>
         <q-card>
             <q-card-section>

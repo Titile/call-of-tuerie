@@ -16,7 +16,10 @@
                         <div>{{session.parties.length}} parties</div>
                     </div>
                     <div class="text-overline text-center">
-                        {{vm.pseudoJoueur(session.winner().id)}}
+                        <q-badge align="middle" color="orange">
+                            <q-icon name="mdi-crown" />
+                        </q-badge>
+                        {{session.pseudoWinners(vm.repoJoueurs.joueurs)}}
                         <q-badge align="middle" color="orange">
                             <q-icon name="mdi-crown" />
                         </q-badge>
