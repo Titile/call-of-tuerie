@@ -1,8 +1,13 @@
 <template>
     <section>
         <q-card class="q-mt-sm">
-            <div class="flex justify-between">
+            <div class="flex items-center justify-between">
                 <q-btn @click="vm.newGame()" color="secondary">Nouvelle game 🎮</q-btn>
+                <div class="flex column text-center">
+                    <div>Amboa chefon'ny amboa :</div>
+                    <div class="text-h6 text-accent">👏👏 {{vm.pseudoJoueur(vm.winnerOfWinner)}} 👏👏</div>
+                </div>
+
                 <q-btn icon="refresh" flat round @click="vm.get()">
 
                 </q-btn>

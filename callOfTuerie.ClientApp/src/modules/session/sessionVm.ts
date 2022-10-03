@@ -7,6 +7,7 @@ import Session from "@/repositories/session/session";
 import SessionRepository from "@/repositories/session/sessionRepository";
 import Routes from "@/router";
 import Routing from "@/router/routing";
+import { countBy, max, maxBy } from "lodash";
 import moment from "moment";
 import SessionModel from "../partie/models/SessionModel";
 
@@ -39,28 +40,32 @@ export default class SessionVm {
     } else this.session.joueurIds.push(id);
   }
 
-  selectAll() {
-    if (this.allSelected) this.session.joueurIds = [];
-    else this.session.joueurIds = this.repoJoueurs.joueurs.map((x) => x.id);
-  }
-
   pseudoJoueur(idJoueur: number) {
     return (
       this.repoJoueurs.joueurs.find((x) => x.id == idJoueur)?.pseudo ?? "-NA-"
     );
   }
 
-  pseudoWinners(winners: Array<{ id: number; score: number }>) {
-    let pseudos = "";
-    for (const winner of winners) {
-      const names = winners.map(
-        (x) =>
-          this.repoJoueurs.joueurs.find((x) => x.id == winner.id)?.pseudo ??
-          "-NA-"
-      );
-      pseudos = names.join(",");
+  selectAll() {
+    if (this.allSelected) this.session.joueurIds = [];
+    else this.session.joueurIds = this.repoJoueurs.joueurs.map((x) => x.id);
+  }
+
+  get winnerOfWinner(): number {
+    const winners = this.sessions.flatMap((x) => x.winner());
+    const countWinner = countBy(winners, (x) => x.id);
+
+    let maxKey = 0,
+      maxValue = 0;
+
+    for (const [key, value] of Object.entries(countWinner)) {
+      if (value > maxValue) {
+        maxValue = value;
+        maxKey = parseInt(key);
+      }
     }
-    return pseudos;
+
+    return maxKey;
   }
 
   add() {

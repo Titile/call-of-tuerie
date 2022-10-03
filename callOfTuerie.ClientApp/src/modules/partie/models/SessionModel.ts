@@ -38,7 +38,6 @@ export default class SessionModel extends Session {
         });
       }
     }
-    console.log(winners);
 
     return winners;
   }
