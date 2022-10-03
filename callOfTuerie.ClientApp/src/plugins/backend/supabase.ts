@@ -22,6 +22,7 @@ export default class Supabase {
     this.api
       .from("partie")
       .on("*", (payload: any) => {
+        console.log("LISTENING PARTIE");
         repoPartie.get();
       })
       .subscribe();
@@ -29,6 +30,8 @@ export default class Supabase {
     this.api
       .from("session")
       .on("*", (payload: any) => {
+        console.log("LISTENING SESSION");
+
         repoSession.get();
       })
       .subscribe();

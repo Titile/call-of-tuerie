@@ -36,8 +36,10 @@ const repoSession = register(new SessionRepository(api))
 const repoPartie = register(new PartieRepository(api))
 const repoMap = register(new MapRepository(api))
 
-api.subscribe(repoJoueur, repoSession, repoPartie, repoMap)
 moment.locale("fr")
+onMounted(() => {
+  api.subscribe(repoJoueur, repoSession, repoPartie, repoMap)
+})
 onBeforeMount(async () => {
   // await repoJoueur.reload();
   // await repoSession.reload();
