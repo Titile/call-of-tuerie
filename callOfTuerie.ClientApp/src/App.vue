@@ -24,6 +24,7 @@ import SessionRepository from './repositories/session/sessionRepository';
 import moment from 'moment';
 import PartieRepository from './repositories/partie/partieRepository';
 import MapRepository from './repositories/map/mapRepository';
+import CustomSocket from './plugins/backend/server';
 
 const configuration = register(new Configuration())
 const drawerVm = register(new DrawerVm())
@@ -35,11 +36,29 @@ const repoJoueur = register(new JoueurRepository(api))
 const repoSession = register(new SessionRepository(api))
 const repoPartie = register(new PartieRepository(api))
 const repoMap = register(new MapRepository(api))
+// const connection = new WebSocket("wss://echo.websocket.org");
+const connection = register(new CustomSocket())
+
+
+// onMounted(() => {
+//   connection.webSocket.onopen = function (event) {
+//     console.log(event)
+//   }
+
+//   connection.webSocket.onmessage = function (event) {
+//     console.log(event)
+//   }
+
+// })
+
 
 moment.locale("fr")
 onMounted(() => {
   api.subscribe(repoJoueur, repoSession, repoPartie, repoMap)
+
 })
+
+
 onBeforeMount(async () => {
   // await repoJoueur.reload();
   // await repoSession.reload();

@@ -3,6 +3,7 @@ import Notification from "@/plugins/Notification";
 import partie_api from "@/repositories/api/partie_api";
 import { Joueur } from "@/repositories/joueur/joueur";
 import JoueurRepository from "@/repositories/joueur/joueurRepository";
+import Map from "@/repositories/map/map";
 import MapRepository from "@/repositories/map/mapRepository";
 import Partie from "@/repositories/partie/partie";
 import PartieRepository from "@/repositories/partie/partieRepository";
@@ -21,24 +22,9 @@ export default class PartieVm {
   repoMap!: MapRepository;
   id!: number;
   joueurs: Joueur[] = [];
+  maps: Array<Map> = [];
+  mapRandom: Map = new Map();
   //repoPartie
-  maps = [
-    "Shipment",
-    "Bazar",
-    "SpeedBall",
-    "Hill",
-    "Killhouse",
-    "Cargo",
-    "Station",
-    "Trench",
-    "Stadium",
-    "Goulag",
-    "Pine",
-    "Livestock",
-    "Dock",
-    "Shoothouse",
-    "Verdansk",
-  ];
 
   constructor() {
     this.router = subscribe(Routing);
@@ -66,13 +52,12 @@ export default class PartieVm {
       };
     });
   }
-  public get optionsMaps() {
-    return this.maps.map((x) => {
-      return {
-        label: x,
-        value: x,
-      };
-    });
+
+  public randomMap() {
+    var indexRandom = Math.floor(Math.random() * this.maps.length);
+    this.mapRandom = this.maps[indexRandom];
+    this.partie.map = this.mapRandom.nom;
+    this.maps.splice(indexRandom, 1);
   }
 
   public pseudoJoueurPartie(idJoueur: number) {
@@ -96,6 +81,7 @@ export default class PartieVm {
       )
       .then(() => {
         this.partie = new Partie();
+        this.randomMap();
       });
   }
 
@@ -111,6 +97,8 @@ export default class PartieVm {
             (this.session.parties = this.repoPartie.orderedParties(this.id))
         );
       this.repoJoueur.get().then((x) => {
+        this.maps = JSON.parse(JSON.stringify(this.repoMap.maps));
+
         this.joueurs = this.repoJoueur.joueurs.filter((x) =>
           this.session.joueurIds.includes(x.id)
         );

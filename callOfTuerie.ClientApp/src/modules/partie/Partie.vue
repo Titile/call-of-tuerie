@@ -1,5 +1,12 @@
 <template>
     <section class="q-gutter-sm">
+        <q-card>
+            <q-card-section class="flex justify-between">
+                <q-btn @click="vm.randomMap()">Map random</q-btn>
+                <div class="text-h4">{{vm.mapRandom.nom}}</div>
+                <div></div>
+            </q-card-section>
+        </q-card>
         <q-card v-if="vm.session && vm.isToday">
             <q-btn flat @click="vm.get(vm.id)" class="card-floating-action right">
                 <q-icon name="mdi-refresh"></q-icon>
